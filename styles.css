@@ -53,6 +53,10 @@
     background-color: rgb(68, 57, 71);
 }
 
+.btn:active {
+    background-color: rgb(38, 34, 39);
+}
+
 .fnc {
     background-color: rgb(68, 57, 71);
 }
@@ -60,6 +64,11 @@
 .fnc:hover {
     background-color: rgb(82, 66, 88);
 }
+
+.fnc:active {
+    background-color: rgb(38, 34, 39);
+}
+
 
 .clear {
     flex-grow: 1;
