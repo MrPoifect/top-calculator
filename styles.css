@@ -2,7 +2,7 @@
     display: flex;
     justify-content: center;
     align-self: center;
-    
+    flex: 0 0 0;
 }
 
 .calcbody {
@@ -11,6 +11,7 @@
     background-color: rgb(46, 34, 51);
     padding: 4px;
     border-radius: 8px;
+    border-style: none;
 }
 
 .screen {
@@ -23,7 +24,8 @@
     margin: 20px 4px 50px 4px;
     border-radius: 8px;
     color: rgb(218, 218, 218);
-    padding: 6px 15px 6px 0px;
+    padding: 6px 15px;
+    font-family: Orbitron, serif;
 }
 
 .buttonrow {
@@ -39,6 +41,7 @@
     width: 90px;
     height: 60px;
     font-size: 25px;
+    font-family: Orbitron, serif;
     border-radius: 8px;
     background-color: rgb(82, 66, 88);
     color: rgb(218, 218, 218);
@@ -63,9 +66,15 @@
 }
 
 .output {
-    font-size: 40px;
+    white-space: normal;
+    display: flex;
+    font-size: 35px;
     padding: 0px;
     margin: 0px;
+    max-width: 330px;
+    flex-wrap: wrap;
+    word-break: break-all;
+    text-align: end;
 }
 
 .sum {
