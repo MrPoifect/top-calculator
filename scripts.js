@@ -82,6 +82,7 @@ function handleButtonPress(button) {
             operate(firstNum, secondNum, currentOperator)};
             break;
     default:
+    if (screen.textContent.length < 20) {
     if (isNaN(button) && button !== ".") {
         // perform operate when both first and second numbers exist 
         if (firstNum !== "" && secondNum !== "") {  
@@ -100,12 +101,12 @@ function handleButtonPress(button) {
         updateScreen(firstNum);
     }
     } else if (firstNum !== "" && currentOperator !== "") {
-        if ((button === "." && !firstNum.includes(".")) || button !== ".") {
+        if ((button === "." && !secondNum.includes(".")) || button !== ".") {
         updateSecondNum(button);
         updateScreen(firstNum + " " + currentOperator + " " + secondNum);
     }
     }
-}};
+}}};
 
 function clearScreen() {
     firstNum = "";
