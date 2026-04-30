@@ -96,12 +96,12 @@ function handleButtonPress(button) {
         }
     } // update first or second number and screen depending on if an operator exists
     else if (currentOperator == "") {
-        if ((button === "." && !firstNum.includes(".")) || button !== ".") {
+        if ((button === "." && !firstNum.includes(".") && firstNum !== "") || button !== ".") {
         updateFirstNum(button);
         updateScreen(firstNum);
     }
     } else if (firstNum !== "" && currentOperator !== "") {
-        if ((button === "." && !secondNum.includes(".")) || button !== ".") {
+        if ((button === "." && !secondNum.includes(".") && secondNum !== "") || button !== ".") {
         updateSecondNum(button);
         updateScreen(firstNum + " " + currentOperator + " " + secondNum);
     }
