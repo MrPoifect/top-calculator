@@ -1,47 +1,115 @@
-let firstNumber = "";
+let firstNum = "";
 let currentOperator = "";
-let secondNumber = "";
+let secondNum = "";
 const screen = document.querySelector(".output");
 
 function addition (a, b) {
-    return Number(a) + Number(b);
+    firstNum = Number(a) + Number(b);
+    currentOperator = "";
+    secondNum = "";
+    updateScreen(firstNum);
 }
 
 function subtract (a, b) {
-    return Number(a)- Number(b);
+    firstNum = Number(a)- Number(b);
+    currentOperator = "";
+    secondNum = "";
+    updateScreen(firstNum);
 }
 
 function multiply (a, b) {
-    return Number(a) * Number(b);
+    firstNum = Number(a) * Number(b);
+    currentOperator = "";
+    secondNum = "";
+    updateScreen(firstNum);
 }
 
 function divide (a, b) {
-    return Number(a) / Number(b);
+    if (b !== "0") {
+    firstNum = Number(a) / Number(b);
+    currentOperator = "";
+    secondNum = "";
+    updateScreen(firstNum);
+    }else updateScreen("Nice Try...");
 }
 
 
 function operate (a, b, operator) {
     switch (operator){
         case "+":
-            return addition(a, b);
+            addition(a, b);
             break;
         case "-":
-            return subtract(a, b);
+            subtract(a, b);
             break;
-        case "*":
-            return multiply(a, b);
+        case "x":
+            multiply(a, b);
             break;
-        case "/":
-            return divide(a, b);
+        case "÷":
+            divide(a, b);
             break;
     }
 }
 
-function updateFirstNumber(num) {
-    return firstNumber += num;
-
+function updateFirstNum(num) {
+    firstNum += num;
 }
+
+function updateSecondNum(num) {
+    secondNum += num;
+}
+
 
 function updateScreen(string) {
     screen.textContent = string
+}
+
+const calc = document.getElementsByTagName("div")[0]
+
+calc.addEventListener("click", (event) => {
+    if(event.target.tagName === 'BUTTON') {
+        handleButtonPress(event.target.textContent);
+    }
+});
+
+function handleButtonPress(button) {
+    switch (button){
+        case "Clear":
+            clearScreen();
+            break;
+        case "=":
+            if (firstNum !== "" && secondNum !== "" ) {
+            operate(firstNum, secondNum, currentOperator)};
+            break;
+    default:
+    if (isNaN(button) && button !== ".") {
+        // perform operate when both first and second numbers exist 
+        if (firstNum !== "" && secondNum !== "") {  
+            operate(firstNum, secondNum, currentOperator);
+            currentOperator = button;
+            updateScreen(firstNum + " " + currentOperator);
+        // update the screen and current operator if no second number or operator
+        } else if (firstNum !== "" && secondNum === ""  && currentOperator === "") {
+            currentOperator = button;
+            updateScreen(firstNum + " " + button);
+        }
+    } // update first or second number and screen depending on if an operator exists
+    else if (currentOperator == "") {
+        if ((button === "." && !firstNum.includes(".")) || button !== ".") {
+        updateFirstNum(button);
+        updateScreen(firstNum);
+    }
+    } else if (firstNum !== "" && currentOperator !== "") {
+        if ((button === "." && !firstNum.includes(".")) || button !== ".") {
+        updateSecondNum(button);
+        updateScreen(firstNum + " " + currentOperator + " " + secondNum);
+    }
+    }
+}};
+
+function clearScreen() {
+    firstNum = "";
+    currentOperator = "";
+    secondNum = "";
+    updateScreen("");
 }
