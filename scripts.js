@@ -25,7 +25,7 @@ function multiply (a, b) {
 }
 
 function divide (a, b) {
-    if (b !== "0") {
+    if (Number(b) !== 0) {
     firstNum = Number(a) / Number(b);
     currentOperator = "";
     secondNum = "";
@@ -81,6 +81,9 @@ function handleButtonPress(button) {
             if (firstNum !== "" && secondNum !== "" ) {
             operate(firstNum, secondNum, currentOperator)};
             break;
+        case "⌫":
+            backspace();
+            break;
     default:
     if (screen.textContent.length < 20) {
     if (isNaN(button) && button !== ".") {
@@ -113,4 +116,58 @@ function clearScreen() {
     currentOperator = "";
     secondNum = "";
     updateScreen("");
+}
+
+function backspace() {
+    if (firstNum !== "" && currentOperator !== "" && secondNum !== "") {
+        secondNum = secondNum.slice(0,-1);
+        updateScreen(firstNum + " " + currentOperator + " " + secondNum);
+    } else if (firstNum !== "" && currentOperator !== "") {
+        currentOperator = "";
+        secondNum = "";
+        updateScreen(firstNum);
+    } else if (firstNum !== "" && firstNum.length > 1) {
+        firstNum = firstNum.slice(0,-1);
+        updateScreen(firstNum);
+    } else if (firstNum.length == 1) {
+        firstNum = "";
+        clearScreen();
+    }
+}
+
+document.addEventListener('keydown', function(event) {
+    handleKeyboardInput(event.key);
+});
+
+
+function handleKeyboardInput(key) {
+    if (!isNaN(key) || key == ".") {
+        handleButtonPress(key);
+    } else
+        switch (key) {
+            case (key = "Backspace"):
+                handleButtonPress("⌫");
+                break;
+            case (key = "+"):
+                handleButtonPress("+");
+                break;
+            case (key = "*"):
+            case (key = "x"):
+                handleButtonPress("x");
+                break;
+            case (key = "/"):
+            case (key = "÷"):
+                handleButtonPress("÷");
+                break;
+            case (key = "Enter"):
+            case (key = "="):
+                handleButtonPress("=");
+                break;
+            case (key = "-"):
+                handleButtonPress("-");
+                break;
+            case (key = "Escape"):
+                clearScreen();
+                break;
+        }
 }
