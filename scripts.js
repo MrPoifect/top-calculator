@@ -73,6 +73,9 @@ calc.addEventListener("click", (event) => {
 });
 
 function handleButtonPress(button) {
+    if (screen.textContent === "Nice Try...") {
+        clearScreen();
+    }
     switch (button){
         case "Clear":
             clearScreen();
